@@ -1,0 +1,45 @@
+<style>
+    @import "../bower_components/angular-material/angular-material.css";
+
+    .md-primary {
+        background-color: #039be5;
+        color: white;
+    }
+
+    md-toolbar {
+        background-color: #CFD8DC;
+    }
+
+    md-input-container {
+        padding-bottom: 0;
+    }
+</style>
+<div flex layout="column" layout-fill layout-margin>
+    <md-toolbar class="md-primary">
+        <h2 class="md-toolbar-tools">
+            <span>To do list</span>
+        </h2>
+    </md-toolbar>
+    <md-content layout="row" layout-align="center start" flex>
+        <div flex="50" flex-md="80" flex-sm="100">
+            <div layout="row" layout-margin flex>
+                <button flex class="md-button md-primary md-raised md-default-theme" (click)="store.save()">Save</button>
+                <button flex class="md-button md-primary md-raised md-default-theme" (click)="store.load()">Load</button>
+                <button flex class="md-button md-primary md-raised md-default-theme" (click)="store.clear()">Clear</button>
+            </div>
+            <div layout="row" layout-margin flex>
+                <md-input-container class="md-input-has-value" flex="60">
+                    <input #newitem class="md-input" placeholder="New to do item" />
+                </md-input-container>
+                <button flex class="md-button md-primary md-raised md-default-theme" (click)="store.addItem(newitem.value)">Add new item</button>
+            </div>
+            <md-list>
+                <md-item *foreach="#item in store.items">
+                    <md-item-content>
+                        <item-editor [item]="item"></item-editor>
+                    </md-item-content>
+                </md-item>
+            </md-list>
+        </div>
+    </md-content>
+</div>
